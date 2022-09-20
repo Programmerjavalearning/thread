@@ -6,11 +6,26 @@ public class Main {
         System.out.println("Main thread starting");
 
         //Construct thread object
-        MyThread myThreadOne = new MyThread("Child #1");
+        MyThread mt1 = new MyThread("Child #1");
+        MyThread mt2 = new MyThread("Child #2");
+        MyThread mt3 = new MyThread("Child #3");
+        MyThread mt4 = new MyThread("Child #4");
+
+
+        for (int i =0 ; i<50; i++){
+            System.out.print(".");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                System.out.println("Main thread interupted");
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Main thread ending");
 
         //Construct an actual thread from our previous object
-        Thread newThread = new Thread(myThreadOne);
-        newThread.start();
+       // Thread newThread = new Thread(myThreadOne);
+        //newThread.start();
 
     }
 }
@@ -18,9 +33,13 @@ public class Main {
 
 class MyThread implements Runnable {
 
+    Thread thread;
+
     String myThread;
 
     public MyThread(String myThread) {
+        thread = new Thread(this, myThread);
+        thread.start();
         this.myThread = myThread;
     }
 
