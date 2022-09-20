@@ -9,10 +9,36 @@ public class Main {
         MyThread mt1 = new MyThread("Child #1");
         MyThread mt2 = new MyThread("Child #2");
         MyThread mt3 = new MyThread("Child #3");
-        MyThread mt4 = new MyThread("Child #4");
+
+        try {
+            mt1.thread.join(); // wait until specified thread ends
+            System.out.println("Child #1 joined");
+            mt2.thread.join();
+            System.out.println("Childd #2 joined");
+            mt3.thread.join();
+            System.out.println("Child #3 joined");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
 
-        for (int i =0 ; i<50; i++){
+/*        do {
+            System.out.println(".");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                System.out.println("Main thread interupted");
+                e.printStackTrace();
+            }
+
+
+        }while(mt1.thread.isAlive() || mt2.thread.isAlive() || mt3.thread.isAlive());
+
+
+
+        System.out.println("Main thread ending");*/
+
+ /*       for (int i =0 ; i<50; i++){
             System.out.print(".");
             try {
                 Thread.sleep(100);
@@ -21,7 +47,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        System.out.println("Main thread ending");
+        System.out.println("Main thread ending");*/
 
         //Construct an actual thread from our previous object
        // Thread newThread = new Thread(myThreadOne);
